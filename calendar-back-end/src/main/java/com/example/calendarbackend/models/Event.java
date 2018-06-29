@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 
 import lombok.*;
 
-@Data@AllArgsConstructor@NoArgsConstructor@Getter@Setter
+@Data @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 @Entity
 @Table(name = "EVENTS")
 public class Event {
