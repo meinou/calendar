@@ -3,7 +3,15 @@
   border: 2px solid orange;
   height: 150px;
   width: 200px;
-  padding-right: 0px; }
+  border-radius: 5px;
+  padding-right: 0px;
+  -webkit-box-shadow: 0px 17px 53px -16px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow: 0px 17px 53px -16px rgba(0, 0, 0, 0.55);
+  box-shadow: 0px 17px 53px -16px rgba(0, 0, 0, 0.55); }
+  .day:nth-last-child(n + 2) {
+    background-color: lightblue; }
+  .day:nth-child(7n), .day:nth-child(7n + 1) {
+    background-color: palegreen; }
 
 ul {
   width: 100%;

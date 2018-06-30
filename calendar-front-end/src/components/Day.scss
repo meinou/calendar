@@ -1,54 +1,62 @@
 .day {
-    margin: 15px;
-    border: 2px solid orange;
-    height: 150px;
-    width: 200px;
-    
-    padding-right: 0px;
+  margin: 15px;
+  border: 2px solid orange;
+  height: 150px;
+  width: 200px;
+  border-radius: 5px;
+  padding-right: 0px;
+  -webkit-box-shadow: 0px 17px 53px -16px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow: 0px 17px 53px -16px rgba(0, 0, 0, 0.55);
+  box-shadow: 0px 17px 53px -16px rgba(0, 0, 0, 0.55);
+  &:nth-last-child(n + 2) {
+    background-color: lightblue;
+  }
+  &:nth-child(7n),
+  &:nth-child(7n + 1) {
+    background-color: palegreen;
+  }
 }
 
-ul{
-    width: 100%;
+ul {
+  width: 100%;
   //  margin: 1px;
-    padding: 0px;
+  padding: 0px;
 }
 
 li {
-    border: 1px solid lavender;
-    list-style-type: none;
-    font-size: 0.5em;
-    margin-left: 0px;
-    flex-wrap: nowrap;
-    text-align: left;
+  border: 1px solid lavender;
+  list-style-type: none;
+  font-size: 0.5em;
+  margin-left: 0px;
+  flex-wrap: nowrap;
+  text-align: left;
 
-    &text{
-        overflow: hidden;
-        white-space: nowrap;
-    }
-    
-      
+  &text {
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }
 
-.time{
-    float: left;
-    margin: 1px 5px 0px 5px;
-    cursor: pointer;
+.time {
+  float: left;
+  margin: 1px 5px 0px 5px;
+  cursor: pointer;
 }
 
-.num{
-    float: left;
+.num {
+  float: left;
   //  margin: 5px;
   cursor: pointer;
 }
 
-.header{
-    margin:0px;
-    padding: 5px;
+.header {
+  margin: 0px;
+  padding: 5px;
 }
-i{
-    margin: 0px;
-    padding: 0px;
-    float: right;
-    cursor: pointer;
-    color: orange;
+i {
+  margin: 0px;
+  padding: 0px;
+  float: right;
+  cursor: pointer;
+  color: orange;
 }
