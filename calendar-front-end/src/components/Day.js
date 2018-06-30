@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import './Day.css';
 import eventService from '../services/eventService';
@@ -58,21 +59,24 @@ class Day extends Component {
 
   createList() {
     const { events } = this.props;
+    events.sort((a, b) => a.date > b.date);
     return (
-      <ul>
+      <div className="events-container">
         {events.map((event) => {
-          const date = new Date(event.date);
+          const date = new Date(event.date).getTime();
           return (
-            <li key={event.id}>
-              <span className="time">
-                {date.getUTCHours()}: {date.getUTCMinutes()}
-              </span>
-              {event.title}
-              <i className="fas fa-times-circle" onClick={() => this.deleteById(event.id)} />
-            </li>
+            <div key={event.id} className="event-record">
+              <Moment className="time" format="HH:mm">
+                {date}
+              </Moment>
+              <div className="title">{event.title}</div>
+              <div className="close">
+                <div className="fas fa-times-circle" onClick={() => this.deleteById(event.id)} />
+              </div>
+            </div>
           );
         })}
-      </ul>
+      </div>
     );
   }
 

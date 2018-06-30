@@ -15,43 +15,61 @@
   &:nth-child(7n + 1) {
     background-color: palegreen;
   }
-}
 
-ul {
-  width: 100%;
-  //  margin: 1px;
-  padding: 0px;
-}
-
-li {
-  border: 1px solid lavender;
-  list-style-type: none;
-  font-size: 0.5em;
-  margin-left: 0px;
-  flex-wrap: nowrap;
-  text-align: left;
-
-  &text {
-    overflow: hidden;
-    white-space: nowrap;
+  .header {
+    margin: 0px;
+    padding: 5px;
+    height: 30px;
   }
-}
+  .events-container {
+    padding-top: 28px;
+    width: 100%;
+    padding: 0px;
 
-.time {
-  float: left;
-  margin: 1px 5px 0px 5px;
-  cursor: pointer;
+    .event-record {
+      border-bottom: 1px solid orange;
+      min-height: 20px;
+      list-style-type: none;
+      font-size: 10px;
+      margin-left: 0px;
+      // flex-wrap: nowrap;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .time {
+        // float: left;
+        margin: 1px 5px 0px 5px;
+        cursor: pointer;
+        // flex: 0 0 32px;
+      }
+
+      .title {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+      }
+      .close {
+        // flex: 0 0 12px;
+        min-width: 12px;
+        width: 12px;
+        cursor: pointer;
+        color: orange;
+        .fas {
+          float: right;
+          font-size: 12px;
+        }
+      }
+    }
+  }
 }
 
 .num {
   float: left;
   //  margin: 5px;
   cursor: pointer;
-}
-
-.header {
-  margin: 0px;
-  padding: 5px;
+  color: orange;
 }
 i {
   margin: 0px;

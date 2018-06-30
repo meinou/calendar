@@ -40,7 +40,7 @@ class Month extends Component {
     this.titleHandler = this.titleHandler.bind(this);
     this.descriptionHandler = this.descriptionHandler.bind(this);
     this.timeHandler = this.timeHandler.bind(this);
-    this.post = this.addEvent.bind(this);
+    this.addEvent = this.addEvent.bind(this);
     this.closeForm = this.closeForm.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
   }
@@ -79,17 +79,17 @@ class Month extends Component {
     if (newEvent.title && newEvent.time && newEvent.description) {
       const copyEvent = {};
       Object.assign(copyEvent, newEvent);
+
       const day = days[dayToUpdate];
       if (!day) {
         return;
       }
+
       const time = newEvent.time.toString();
       const month = this.months[currentMonth - 1];
-      const string = `${dayToUpdate} ${month} ${currentYear} ${time}`;
+      const string = `${day.convertedDate.getDate()} ${month} ${currentYear} ${time}`;
       const date = new Date(string);
       copyEvent.date = date;
-
-      day;
 
       eventService
         .post(copyEvent)
@@ -106,15 +106,12 @@ class Month extends Component {
   }
 
   deleteEvent(index, id) {
-    console.log('deleteEvent');
-    console.log('index', index, 'id', id);
     const { days } = this.state;
     const day = days[index];
     if (!day) {
       return;
     }
     const dayEvents = day.events.filter((e) => e.id !== id);
-    console.log('dayEvents:', dayEvents);
     day.events = dayEvents;
     this.setState({ days });
   }

@@ -12,34 +12,45 @@
     background-color: lightblue; }
   .day:nth-child(7n), .day:nth-child(7n + 1) {
     background-color: palegreen; }
-
-ul {
-  width: 100%;
-  padding: 0px; }
-
-li {
-  border: 1px solid lavender;
-  list-style-type: none;
-  font-size: 0.5em;
-  margin-left: 0px;
-  flex-wrap: nowrap;
-  text-align: left; }
-  litext {
-    overflow: hidden;
-    white-space: nowrap; }
-
-.time {
-  float: left;
-  margin: 1px 5px 0px 5px;
-  cursor: pointer; }
+  .day .header {
+    margin: 0px;
+    padding: 5px;
+    height: 30px; }
+  .day .events-container {
+    padding-top: 28px;
+    width: 100%;
+    padding: 0px; }
+    .day .events-container .event-record {
+      border-bottom: 1px solid orange;
+      min-height: 20px;
+      list-style-type: none;
+      font-size: 10px;
+      margin-left: 0px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+      .day .events-container .event-record .time {
+        margin: 1px 5px 0px 5px;
+        cursor: pointer; }
+      .day .events-container .event-record .title {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis; }
+      .day .events-container .event-record .close {
+        min-width: 12px;
+        width: 12px;
+        cursor: pointer;
+        color: orange; }
+        .day .events-container .event-record .close .fas {
+          float: right;
+          font-size: 12px; }
 
 .num {
   float: left;
-  cursor: pointer; }
-
-.header {
-  margin: 0px;
-  padding: 5px; }
+  cursor: pointer;
+  color: orange; }
 
 i {
   margin: 0px;
