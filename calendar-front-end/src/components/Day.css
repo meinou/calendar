@@ -15,7 +15,8 @@
   .day .header {
     margin: 0px;
     padding: 5px;
-    height: 30px; }
+    height: 30px;
+    color: orange; }
   .day .events-container {
     padding-top: 28px;
     width: 100%;
@@ -37,7 +38,10 @@
         width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
-        -o-text-overflow: ellipsis; }
+        -o-text-overflow: ellipsis;
+        margin-right: 2px;
+        margin-top: 1px;
+        margin-bottom: 1px; }
       .day .events-container .event-record .close {
         min-width: 12px;
         width: 12px;
@@ -45,16 +49,15 @@
         color: orange; }
         .day .events-container .event-record .close .fas {
           float: right;
-          font-size: 12px; }
+          font-size: 12px;
+          margin-right: 2px; }
 
 .num {
   float: left;
-  cursor: pointer;
-  color: orange; }
+  cursor: pointer; }
 
 i {
   margin: 0px;
   padding: 0px;
   float: right;
-  cursor: pointer;
-  color: orange; }
+  cursor: pointer; }

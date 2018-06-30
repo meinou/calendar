@@ -11,38 +11,9 @@ class Day extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      events: [],
-      date: null,
-      dateUTC: null,
-    };
-    this.getByDate = this.getByDate.bind(this);
+    this.state = {};
     this.createList = this.createList.bind(this);
     this.deleteById = this.deleteById.bind(this);
-  }
-
-  componentDidMount() {
-    // this.getByDate();
-  }
-
-  getByDate() {
-    const { day, month, year } = this.props;
-    const date = `${year}${Day.formatDayMonth(month)}${Day.formatDayMonth(day)}`;
-    eventService.getByDate(date).then((resp) => {
-      if (!resp.data) {
-        return;
-      }
-      const events = resp.data.map((item) => ({
-        id: item[0],
-        date: item[1],
-        title: item[2],
-        description: item[3],
-        address: item[4],
-      }));
-      this.setState({
-        events,
-      });
-    });
   }
 
   deleteById(id) {
@@ -81,11 +52,12 @@ class Day extends Component {
   }
 
   render() {
-    const { click, day, index } = this.props;
+    const { click, day, header, index } = this.props;
     return (
       <div className="day">
         <div className="header">
           <span className="num">{day}</span>
+          <span className="text">{header}</span>
           <i className="fas fa-plus-square" onClick={() => click(index)} />
         </div>
         {this.createList()}
@@ -98,6 +70,7 @@ Day.propTypes = {
   click: PropTypes.func.isRequired,
   deleteHandle: PropTypes.func.isRequired,
   events: PropTypes.array.isRequired,
+  header: PropTypes.string,
   index: PropTypes.number.isRequired,
 };
 

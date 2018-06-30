@@ -23,8 +23,6 @@ class Month extends Component {
     ];
     this.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     this.state = {
-      currentMonth: 7,
-      currentYear: 2018,
       days: [],
       addForm: false,
       newEvent: {
@@ -46,11 +44,17 @@ class Month extends Component {
   }
 
   componentDidMount() {
-    this.getEvents();
+    const today = new Date();
+    this.setState(
+      {
+        currentMonth: today.getMonth() + 1,
+        currentYear: today.getFullYear(),
+      },
+      this.getEvents
+    );
   }
 
   getEvents() {
-    // const { month, year } = this.props;
     const { currentMonth, currentYear } = this.state;
     const date = `${currentYear}${Day.formatDayMonth(currentMonth)}`;
     eventService.getForMonth(date).then((resp) => {
