@@ -4,6 +4,13 @@ import Week from './Week';
 import './Month.css';
 import eventService from '../services/eventService';
 
+const defaultNewEvent = {
+  title: '',
+  description: '',
+  time: '00:00',
+  address: '',
+};
+
 class Month extends Component {
   constructor() {
     super();
@@ -11,13 +18,9 @@ class Month extends Component {
     this.state = {
       days: [],
       addForm: false,
-      newEvent: {
-        title: null,
-        description: null,
-        time: '13:37',
-        address: null,
-      },
+      newEvent: Object.assign({}, defaultNewEvent),
     };
+
     this.createMonth = this.createMonth.bind(this);
     this.getEvents = this.getEvents.bind(this);
     this.clickAdd = this.clickAdd.bind(this);
@@ -53,17 +56,6 @@ class Month extends Component {
       this.setState({
         days: resp.data,
       });
-    });
-  }
-
-  closeForm() {
-    this.setState({
-      newEvent: {
-        title: null,
-        description: null,
-        time: null,
-      },
-      addForm: false,
     });
   }
 
@@ -139,6 +131,8 @@ class Month extends Component {
   }
 
   createAddForm() {
+    const { title, description, address, time } = this.state.newEvent;
+    console.log('time', time);
     return (
       <div className="addform">
         <i className="fas fa-times-circle" onClick={() => this.closeForm()} />
@@ -146,6 +140,7 @@ class Month extends Component {
         <div className="form-group">
           <input
             type="text"
+            value={title}
             onChange={this.titleHandler}
             className="form-control"
             aria-describedby="emailHelp"
@@ -155,6 +150,7 @@ class Month extends Component {
 
         <input
           type="text"
+          value={description}
           onChange={this.descriptionHandler}
           className="form-control"
           aria-describedby="emailHelp"
@@ -163,6 +159,7 @@ class Month extends Component {
 
         <input
           type="text"
+          value={address}
           onChange={this.addressHandler}
           className="form-control"
           aria-describedby="emailHelp"
@@ -171,7 +168,7 @@ class Month extends Component {
 
         <div className="form-group">
           <input
-            value={this.state.newEvent.time}
+            value={time}
             type="time"
             onChange={this.timeHandler}
             className="form-control"
@@ -192,6 +189,13 @@ class Month extends Component {
     const datePart = date.split('T')[0];
     const yearMonthDate = datePart.split('-');
     return new Date(yearMonthDate[0], yearMonthDate[1] - 1, yearMonthDate[2]);
+  }
+
+  closeForm() {
+    this.setState({
+      newEvent: Object.assign({}, defaultNewEvent),
+      addForm: false,
+    });
   }
 
   createMonth() {

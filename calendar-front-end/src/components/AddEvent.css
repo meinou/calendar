@@ -1,0 +1,27 @@
+.fa-times-circle {
+  position: relative;
+  float: right;
+  font-size: 1.3em;
+  margin: 5px; }
+
+.form-groupi {
+  color: #b1af92; }
+  .form-groupi:hover {
+    color: #b1929a; }
+
+.addform {
+  padding: 15px; }
+  .addform i {
+    color: #b1af92; }
+    .addform i:hover {
+      color: #b1929a; }
+
+input {
+  margin-top: 20px; }
+
+.btn {
+  background-color: #b1af92;
+  border-color: #dee79c; }
+  .btn:hover {
+    background-color: #b1929a;
+    border-color: #865763; }

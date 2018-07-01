@@ -1,14 +1,11 @@
-$pink: #e2d3e4;
-$light-green: #dee79c;
-$pale-green: #b1af92;
-$dark-velvet: #865763;
-$light-velvet: #b1929a;
+@import './Colors.scss';
 
 .day {
-  margin: 15px;
+  margin: 10px;
   border: 2px solid $dark-velvet;
-  height: 120px;
-  width: 200px;
+  min-height: 120px;
+  width: 204px;
+  min-width: 80px;
   border-radius: 5px;
   padding-right: 0px;
   -webkit-box-shadow: 0px 17px 53px -16px rgba(0, 0, 0, 0.55);
@@ -50,11 +47,10 @@ $light-velvet: #b1929a;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 2px;
       .time {
-        // float: left;
         margin: 1px 5px 0px 5px;
         cursor: pointer;
-        // flex: 0 0 32px;
       }
 
       .title {
@@ -65,6 +61,8 @@ $light-velvet: #b1929a;
         margin-right: 2px;
         margin-top: 1px;
         margin-bottom: 1px;
+        word-break: break-all;
+        max-height: 30px;
       }
       .close {
         // flex: 0 0 12px;
