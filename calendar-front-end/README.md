@@ -1,8 +1,8 @@
 # Application works locally with `npm start`
 
-![alt text](https://github.com/meinou/calendar/tree/master/calendar-front-end/src/images/month.png)
-![alt text](https://github.com/meinou/calendar/tree/master/calendar-front-end/src/images/add_grandma.png)
-![alt text](https://github.com/meinou/calendar/tree/master/calendar-front-end/src/images/grandma_added.png)
+![alt text](https://github.com/meinou/calendar/blob/master/calendar-front-end/src/images/month.png)
+![alt text](https://github.com/meinou/calendar/blob/master/calendar-front-end/src/images/add_grandma.png)
+![alt text](https://github.com/meinou/calendar/blob/master/calendar-front-end/src/images/grandma_added.png)
 
 ## Application entry point is current day and current month
 
