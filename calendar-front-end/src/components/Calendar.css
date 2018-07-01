@@ -5,4 +5,8 @@
   padding: 10px; }
   .month-container .month-button {
     padding: 8px;
-    font-size: 14px; }
+    font-size: 14px;
+    background-color: #b1af92; }
+  .month-container .btn-success {
+    background-color: #b1929a;
+    border-color: #865763; }

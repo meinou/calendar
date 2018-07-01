@@ -1,13 +1,13 @@
 $pink: #e2d3e4;
 $light-green: #dee79c;
 $pale-green: #b1af92;
-$dark-velvet: #9ab192;
-$light-velvet: #9ab192;
+$dark-velvet: #865763;
+$light-velvet: #b1929a;
 
 .day {
   margin: 15px;
-  border: 2px solid orange;
-  height: 150px;
+  border: 2px solid $dark-velvet;
+  height: 120px;
   width: 200px;
   border-radius: 5px;
   padding-right: 0px;
@@ -32,7 +32,7 @@ $light-velvet: #9ab192;
     margin: 0px;
     padding: 5px;
     height: 30px;
-    color: orange;
+    color: $dark-velvet;
   }
   .events-container {
     padding-top: 28px;
@@ -40,7 +40,7 @@ $light-velvet: #9ab192;
     padding: 0px;
 
     .event-record {
-      border-bottom: 1px solid orange;
+      border-bottom: 1px solid $dark-velvet;
       min-height: 20px;
       list-style-type: none;
       font-size: 10px;
@@ -71,7 +71,7 @@ $light-velvet: #9ab192;
         min-width: 12px;
         width: 12px;
         cursor: pointer;
-        color: orange;
+        color: $dark-velvet;
         .fas {
           float: right;
           font-size: 12px;

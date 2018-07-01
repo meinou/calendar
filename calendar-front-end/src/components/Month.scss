@@ -1,3 +1,9 @@
+$pink: #e2d3e4;
+$light-green: #dee79c;
+$pale-green: #b1af92;
+$dark-velvet: #865763;
+$light-velvet: #b1929a;
+
 .month {
   display: flex;
   flex-wrap: wrap;
@@ -21,11 +27,11 @@
 }
 
 .addform {
-  height: 300px;
+  height: 350px;
   width: 42%;
   position: absolute;
   background-color: white;
-  border: solid 2px orange;
+  border: solid 2px $dark-velvet;
   -webkit-box-shadow: 0px 17px 53px 8px rgba(0, 0, 0, 0.55);
   -moz-box-shadow: 0px 17px 53px 8px rgba(0, 0, 0, 0.55);
   box-shadow: 0px 17px 53px 8px rgba(0, 0, 0, 0.55);
@@ -43,4 +49,35 @@
   float: right;
   font-size: 1.3em;
   margin: 5px;
+}
+
+.form-group {
+  &i {
+    color: $pale-green;
+    &:hover {
+      color: $light-velvet;
+    }
+  }
+}
+.addform {
+  padding: 15px;
+  i {
+    color: $pale-green;
+    &:hover {
+      color: $light-velvet;
+    }
+  }
+}
+
+input {
+  margin-top: 20px;
+}
+
+.btn {
+  background-color: $pale-green;
+  border-color: $light-green;
+  &:hover {
+    background-color: $light-velvet;
+    border-color: $dark-velvet;
+  }
 }

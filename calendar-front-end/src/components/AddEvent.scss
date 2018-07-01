@@ -1,0 +1,40 @@
+#appt-time {
+}
+
+.fa-times-circle {
+  position: relative;
+  float: right;
+  font-size: 1.3em;
+  margin: 5px;
+}
+
+.form-group {
+  &i {
+    color: $pale-green;
+    &:hover {
+      color: $light-velvet;
+    }
+  }
+}
+.addform {
+  padding: 15px;
+  i {
+    color: $pale-green;
+    &:hover {
+      color: $light-velvet;
+    }
+  }
+}
+
+input {
+  margin-top: 20px;
+}
+
+.btn {
+  background-color: $pale-green;
+  border-color: $light-green;
+  &:hover {
+    background-color: $light-velvet;
+    border-color: $dark-velvet;
+  }
+}

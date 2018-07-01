@@ -1,7 +1,7 @@
 .day {
   margin: 15px;
-  border: 2px solid orange;
-  height: 150px;
+  border: 2px solid #865763;
+  height: 120px;
   width: 200px;
   border-radius: 5px;
   padding-right: 0px;
@@ -12,20 +12,20 @@
   .day:nth-last-child(n + 2) {
     background-color: #e2d3e4; }
   .day:nth-child(7n), .day:nth-child(7n + 1) {
-    background-color: #9ab192; }
+    background-color: #b1929a; }
   .day.current {
     opacity: 1; }
   .day .header {
     margin: 0px;
     padding: 5px;
     height: 30px;
-    color: orange; }
+    color: #865763; }
   .day .events-container {
     padding-top: 28px;
     width: 100%;
     padding: 0px; }
     .day .events-container .event-record {
-      border-bottom: 1px solid orange;
+      border-bottom: 1px solid #865763;
       min-height: 20px;
       list-style-type: none;
       font-size: 10px;
@@ -49,7 +49,7 @@
         min-width: 12px;
         width: 12px;
         cursor: pointer;
-        color: orange; }
+        color: #865763; }
         .day .events-container .event-record .close .fas {
           float: right;
           font-size: 12px;

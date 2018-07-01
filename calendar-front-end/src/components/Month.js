@@ -14,7 +14,8 @@ class Month extends Component {
       newEvent: {
         title: null,
         description: null,
-        time: null,
+        time: '13:37',
+        address: null,
       },
     };
     this.createMonth = this.createMonth.bind(this);
@@ -27,6 +28,7 @@ class Month extends Component {
     this.addEvent = this.addEvent.bind(this);
     this.closeForm = this.closeForm.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
+    this.addressHandler = this.addressHandler.bind(this);
   }
 
   componentDidMount() {
@@ -68,7 +70,7 @@ class Month extends Component {
   addEvent() {
     const { month, year } = this.props;
     const { dayToUpdate, newEvent, days } = this.state;
-    if (newEvent.title && newEvent.time && newEvent.description) {
+    if (newEvent.title && newEvent.time) {
       const copyEvent = {};
       Object.assign(copyEvent, newEvent);
 
@@ -114,6 +116,12 @@ class Month extends Component {
     this.setState({ newEvent });
   }
 
+  addressHandler(event) {
+    const { newEvent } = this.state;
+    newEvent.address = event.target.value;
+    this.setState({ newEvent });
+  }
+
   titleHandler(event) {
     const { newEvent } = this.state;
     newEvent.title = event.target.value;
@@ -136,31 +144,35 @@ class Month extends Component {
         <i className="fas fa-times-circle" onClick={() => this.closeForm()} />
 
         <div className="form-group">
-          <label>Title</label>
           <input
             type="text"
             onChange={this.titleHandler}
             className="form-control"
-            id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Title"
           />
         </div>
-        <label>Description</label>
+
         <input
           type="text"
           onChange={this.descriptionHandler}
           className="form-control"
-          id="exampleInputEmail1"
           aria-describedby="emailHelp"
           placeholder="Description"
         />
 
+        <input
+          type="text"
+          onChange={this.addressHandler}
+          className="form-control"
+          aria-describedby="emailHelp"
+          placeholder="Address"
+        />
+
         <div className="form-group">
-          <label>Time:</label>
           <input
+            value={this.state.newEvent.time}
             type="time"
-            value="13:30"
             onChange={this.timeHandler}
             className="form-control"
             id="appt-time"
