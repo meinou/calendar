@@ -18,4 +18,4 @@ To create one more event click "+" at the right-top corner of day card
 
 To remove event click at the cross next to event in the list
 
-(upcoming) To see event details and modify event click at the time of the event
+To see event details and modify event click at the time of the event

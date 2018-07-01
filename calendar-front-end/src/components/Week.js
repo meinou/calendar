@@ -24,13 +24,14 @@ class Week extends Component {
   }
 
   createWeek() {
-    const { days, click, deleteHandle } = this.props;
+    const { days, click, clickTime, deleteHandle } = this.props;
     return days.map((day, i) => (
       <Day
         key={i}
         index={day.index}
         day={day.convertedDate.getDate()}
         click={click}
+        clickTime={clickTime}
         header={this.isToday(day.convertedDate) ? 'Today' : ''}
         currentMonth={this.isCurrentMonth(day.convertedDate)}
         events={day.events}

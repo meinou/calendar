@@ -3,13 +3,7 @@ import monthService from '../services/monthService';
 import Week from './Week';
 import './Month.css';
 import eventService from '../services/eventService';
-
-const defaultNewEvent = {
-  title: '',
-  description: '',
-  time: '00:00',
-  address: '',
-};
+import EventDetails from './EventDetails';
 
 class Month extends Component {
   constructor() {
@@ -17,21 +11,17 @@ class Month extends Component {
     this.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     this.state = {
       days: [],
-      addForm: false,
-      newEvent: Object.assign({}, defaultNewEvent),
+      showDetails: false,
+      editEvent: null,
     };
 
     this.createMonth = this.createMonth.bind(this);
     this.getEvents = this.getEvents.bind(this);
-    this.clickAdd = this.clickAdd.bind(this);
-    this.createAddForm = this.createAddForm.bind(this);
-    this.titleHandler = this.titleHandler.bind(this);
-    this.descriptionHandler = this.descriptionHandler.bind(this);
-    this.timeHandler = this.timeHandler.bind(this);
-    this.addEvent = this.addEvent.bind(this);
+    this.clickEdit = this.clickEdit.bind(this);
     this.closeForm = this.closeForm.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
-    this.addressHandler = this.addressHandler.bind(this);
+    this.clickEdit = this.clickEdit.bind(this);
+    this.updateDays = this.updateDays.bind(this);
   }
 
   componentDidMount() {
@@ -59,36 +49,41 @@ class Month extends Component {
     });
   }
 
-  addEvent() {
+  updateDays(dayToUpdate, event) {
+    const { days } = this.state;
     const { month, year } = this.props;
-    const { dayToUpdate, newEvent, days } = this.state;
-    if (newEvent.title && newEvent.time) {
-      const copyEvent = {};
-      Object.assign(copyEvent, newEvent);
+
+    if (event.title && event.time) {
+      const copyEvent = Object.assign({}, event);
 
       const day = days[dayToUpdate];
       if (!day) {
         return;
       }
 
-      const time = newEvent.time.toString();
+      const time = event.time.toString();
       const newMonth = monthService.getMonthName(month);
       const string = `${day.convertedDate.getDate()} ${newMonth} ${year} ${time}`;
       const date = new Date(string);
       copyEvent.date = date;
 
-      eventService
-        .post(copyEvent)
-        .then((resp) => {
-          this.closeForm();
+      const promise = copyEvent.id
+        ? eventService.patch(copyEvent.id, copyEvent)
+        : eventService.post(copyEvent);
 
+      promise
+        .then((resp) => {
           const event = resp.data;
           event.convertedDate = this.getDateFromServerDateString(event.date);
+          if (copyEvent.id) {
+            day.events = day.events ? day.events.filter((e) => e.id !== copyEvent.id) : [];
+          }
           day.events.push(event);
           this.setState({ days });
         })
         .catch(console.error);
     }
+    this.setState({ days });
   }
 
   deleteEvent(index, id) {
@@ -102,87 +97,15 @@ class Month extends Component {
     this.setState({ days });
   }
 
-  descriptionHandler(event) {
-    const { newEvent } = this.state;
-    newEvent.description = event.target.value;
-    this.setState({ newEvent });
-  }
-
-  addressHandler(event) {
-    const { newEvent } = this.state;
-    newEvent.address = event.target.value;
-    this.setState({ newEvent });
-  }
-
-  titleHandler(event) {
-    const { newEvent } = this.state;
-    newEvent.title = event.target.value;
-    this.setState({ newEvent });
-  }
-
-  timeHandler(event) {
-    const { newEvent } = this.state;
-    newEvent.time = event.target.value;
-    this.setState({ newEvent });
-  }
-
-  clickAdd(index) {
-    this.setState({ addForm: true, dayToUpdate: index });
-  }
-
-  createAddForm() {
-    const { title, description, address, time } = this.state.newEvent;
-    console.log('time', time);
-    return (
-      <div className="addform">
-        <i className="fas fa-times-circle" onClick={() => this.closeForm()} />
-
-        <div className="form-group">
-          <input
-            type="text"
-            value={title}
-            onChange={this.titleHandler}
-            className="form-control"
-            aria-describedby="emailHelp"
-            placeholder="Title"
-          />
-        </div>
-
-        <input
-          type="text"
-          value={description}
-          onChange={this.descriptionHandler}
-          className="form-control"
-          aria-describedby="emailHelp"
-          placeholder="Description"
-        />
-
-        <input
-          type="text"
-          value={address}
-          onChange={this.addressHandler}
-          className="form-control"
-          aria-describedby="emailHelp"
-          placeholder="Address"
-        />
-
-        <div className="form-group">
-          <input
-            value={time}
-            type="time"
-            onChange={this.timeHandler}
-            className="form-control"
-            id="appt-time"
-            required
-          />
-        </div>
-        <div className="form-check" />
-
-        <button onClick={this.addEvent} className="btn btn-primary">
-          Add event
-        </button>
-      </div>
-    );
+  clickEdit(index, eventId) {
+    const { days } = this.state;
+    const day = days[index];
+    const event = day && day.events.find((e) => e.id === eventId);
+    this.setState({
+      showDetails: true,
+      dayToUpdate: index,
+      editEvent: event ? Object.assign({}, event) : null,
+    });
   }
 
   getDateFromServerDateString(date) {
@@ -192,10 +115,7 @@ class Month extends Component {
   }
 
   closeForm() {
-    this.setState({
-      newEvent: Object.assign({}, defaultNewEvent),
-      addForm: false,
-    });
+    this.setState({ showDetails: false, editEvent: null });
   }
 
   createMonth() {
@@ -225,7 +145,8 @@ class Month extends Component {
       return (
         <Week
           key={ind}
-          click={this.clickAdd}
+          click={this.clickEdit}
+          clickTime={this.clickEdit}
           month={month}
           year={year}
           days={week}
@@ -237,7 +158,7 @@ class Month extends Component {
 
   render() {
     const { month, year } = this.props;
-    const form = this.state.addForm ? this.createAddForm() : '';
+    const { dayToUpdate, editEvent, showDetails } = this.state;
     return (
       <div>
         <p>
@@ -254,7 +175,16 @@ class Month extends Component {
           </div>
           {this.createMonth()}
         </div>
-        {form}
+        {showDetails ? (
+          <EventDetails
+            close={this.closeForm}
+            update={this.updateDays}
+            dayToUpdate={dayToUpdate}
+            event={editEvent}
+          />
+        ) : (
+          ''
+        )}
       </div>
     );
   }

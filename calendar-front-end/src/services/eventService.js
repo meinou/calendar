@@ -18,6 +18,11 @@ eventService.getByDate = (date) => {
   return axios.get(url);
 };
 
+eventService.getById = (id) => {
+  const url = `${baseUrl}/${id}`;
+  return axios.get(url);
+};
+
 eventService.delete = (id) => {
   const url = `${baseUrl}/${id}`;
   return axios.delete(url);
@@ -25,6 +30,10 @@ eventService.delete = (id) => {
 
 eventService.post = (newEvent) => {
   return axios.post(baseUrl, newEvent);
+};
+
+eventService.patch = (id, event) => {
+  return axios.patch(`${baseUrl}/${id}`, event);
 };
 
 export default eventService;

@@ -25,7 +25,8 @@ class Day extends Component {
   }
 
   createList() {
-    const { events } = this.props;
+    const { events, clickTime, index } = this.props;
+
     events.sort((a, b) => a.date > b.date);
     return (
       <div className="events-container">
@@ -33,7 +34,7 @@ class Day extends Component {
           const date = new Date(event.date).getTime();
           return (
             <div key={event.id} className="event-record">
-              <Moment className="time" format="HH:mm">
+              <Moment className="time" onClick={() => clickTime(index, event.id)} format="HH:mm">
                 {date}
               </Moment>
               <div className="title">{event.title}</div>
@@ -64,6 +65,7 @@ class Day extends Component {
 
 Day.propTypes = {
   click: PropTypes.func.isRequired,
+  clickTime: PropTypes.func.isRequired,
   deleteHandle: PropTypes.func.isRequired,
   events: PropTypes.array.isRequired,
   header: PropTypes.string,

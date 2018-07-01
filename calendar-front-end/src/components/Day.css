@@ -38,7 +38,10 @@
       margin-bottom: 2px; }
       .day .events-container .event-record .time {
         margin: 1px 5px 0px 5px;
-        cursor: pointer; }
+        cursor: pointer;
+        text-decoration: underline; }
+        .day .events-container .event-record .time:hover {
+          opacity: 0.67; }
       .day .events-container .event-record .title {
         width: 100%;
         overflow: hidden;
