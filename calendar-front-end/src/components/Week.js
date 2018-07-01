@@ -18,6 +18,11 @@ class Week extends Component {
     );
   }
 
+  isCurrentMonth(date) {
+    const { month, year } = this.props;
+    return year === date.getFullYear() && month === date.getMonth();
+  }
+
   createWeek() {
     const { days, click, deleteHandle } = this.props;
     return days.map((day, i) => (
@@ -27,6 +32,7 @@ class Week extends Component {
         day={day.convertedDate.getDate()}
         click={click}
         header={this.isToday(day.convertedDate) ? 'Today' : ''}
+        currentMonth={this.isCurrentMonth(day.convertedDate)}
         events={day.events}
         deleteHandle={deleteHandle}
       />

@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import Moment from 'react-moment';
 import PropTypes from 'prop-types';
+import Moment from 'react-moment';
 import './Day.css';
 import eventService from '../services/eventService';
 
 class Day extends Component {
-  static formatDayMonth(dayOrMonth) {
-    return `${dayOrMonth < 10 ? '0' : ''}${dayOrMonth}`;
-  }
-
   constructor(props) {
     super(props);
     this.state = {};
@@ -52,9 +48,9 @@ class Day extends Component {
   }
 
   render() {
-    const { click, day, header, index } = this.props;
+    const { click, currentMonth, day, header, index } = this.props;
     return (
-      <div className="day">
+      <div className={currentMonth ? 'current day' : 'day'}>
         <div className="header">
           <span className="num">{day}</span>
           <span className="text">{header}</span>
@@ -72,6 +68,7 @@ Day.propTypes = {
   events: PropTypes.array.isRequired,
   header: PropTypes.string,
   index: PropTypes.number.isRequired,
+  currentMonth: PropTypes.bool.isRequired,
 };
 
 export default Day;

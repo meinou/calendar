@@ -7,11 +7,14 @@
   padding-right: 0px;
   -webkit-box-shadow: 0px 17px 53px -16px rgba(0, 0, 0, 0.55);
   -moz-box-shadow: 0px 17px 53px -16px rgba(0, 0, 0, 0.55);
-  box-shadow: 0px 17px 53px -16px rgba(0, 0, 0, 0.55); }
+  box-shadow: 0px 17px 53px -16px rgba(0, 0, 0, 0.55);
+  opacity: 0.6; }
   .day:nth-last-child(n + 2) {
-    background-color: lightblue; }
+    background-color: #e2d3e4; }
   .day:nth-child(7n), .day:nth-child(7n + 1) {
-    background-color: palegreen; }
+    background-color: #9ab192; }
+  .day.current {
+    opacity: 1; }
   .day .header {
     margin: 0px;
     padding: 5px;

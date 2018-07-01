@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import Month from './components/Month';
+import Calendar from './components/Calendar';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Month/>
+        <Calendar />
       </div>
     );
   }

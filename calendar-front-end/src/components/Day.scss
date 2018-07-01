@@ -1,3 +1,9 @@
+$pink: #e2d3e4;
+$light-green: #dee79c;
+$pale-green: #b1af92;
+$dark-velvet: #9ab192;
+$light-velvet: #9ab192;
+
 .day {
   margin: 15px;
   border: 2px solid orange;
@@ -9,11 +15,17 @@
   -moz-box-shadow: 0px 17px 53px -16px rgba(0, 0, 0, 0.55);
   box-shadow: 0px 17px 53px -16px rgba(0, 0, 0, 0.55);
   &:nth-last-child(n + 2) {
-    background-color: lightblue;
+    background-color: $pink;
   }
   &:nth-child(7n),
   &:nth-child(7n + 1) {
-    background-color: palegreen;
+    background-color: $light-velvet;
+  }
+
+  opacity: 0.6;
+
+  &.current {
+    opacity: 1;
   }
 
   .header {

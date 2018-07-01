@@ -1,0 +1,10 @@
+.month-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 10px;
+  .month-button {
+    padding: 8px;
+    font-size: 14px;
+  }
+}

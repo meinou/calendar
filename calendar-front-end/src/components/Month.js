@@ -1,26 +1,12 @@
 import React, { Component } from 'react';
+import monthService from '../services/monthService';
 import Week from './Week';
-import Day from './Day';
 import './Month.css';
 import eventService from '../services/eventService';
 
 class Month extends Component {
   constructor() {
     super();
-    this.months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
     this.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     this.state = {
       days: [],
@@ -44,19 +30,20 @@ class Month extends Component {
   }
 
   componentDidMount() {
-    const today = new Date();
-    this.setState(
-      {
-        currentMonth: today.getMonth() + 1,
-        currentYear: today.getFullYear(),
-      },
-      this.getEvents
-    );
+    this.getEvents();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { month } = this.props;
+    if (month !== prevProps.month) {
+      this.getEvents();
+    }
   }
 
   getEvents() {
-    const { currentMonth, currentYear } = this.state;
-    const date = `${currentYear}${Day.formatDayMonth(currentMonth)}`;
+    const { month, year } = this.props;
+    const realMonth = month + 1;
+    const date = `${year}${realMonth < 10 ? '0' : ''}${realMonth}`;
     eventService.getForMonth(date).then((resp) => {
       if (!resp || !resp.data) {
         return;
@@ -79,7 +66,8 @@ class Month extends Component {
   }
 
   addEvent() {
-    const { currentMonth, currentYear, dayToUpdate, newEvent, days } = this.state;
+    const { month, year } = this.props;
+    const { dayToUpdate, newEvent, days } = this.state;
     if (newEvent.title && newEvent.time && newEvent.description) {
       const copyEvent = {};
       Object.assign(copyEvent, newEvent);
@@ -90,8 +78,8 @@ class Month extends Component {
       }
 
       const time = newEvent.time.toString();
-      const month = this.months[currentMonth - 1];
-      const string = `${day.convertedDate.getDate()} ${month} ${currentYear} ${time}`;
+      const newMonth = monthService.getMonthName(month);
+      const string = `${day.convertedDate.getDate()} ${newMonth} ${year} ${time}`;
       const date = new Date(string);
       copyEvent.date = date;
 
@@ -172,6 +160,7 @@ class Month extends Component {
           <label>Time:</label>
           <input
             type="time"
+            value="13:30"
             onChange={this.timeHandler}
             className="form-control"
             id="appt-time"
@@ -194,7 +183,8 @@ class Month extends Component {
   }
 
   createMonth() {
-    const { currentMonth, currentYear, days } = this.state;
+    const { month, year } = this.props;
+    const { days } = this.state;
     if (!days) {
       return;
     }
@@ -220,8 +210,8 @@ class Month extends Component {
         <Week
           key={ind}
           click={this.clickAdd}
-          month={currentMonth}
-          year={currentYear}
+          month={month}
+          year={year}
           days={week}
           deleteHandle={this.deleteEvent}
         />
@@ -230,11 +220,13 @@ class Month extends Component {
   }
 
   render() {
+    const { month, year } = this.props;
     const form = this.state.addForm ? this.createAddForm() : '';
     return (
       <div>
         <p>
-          {this.months[this.state.currentMonth - 1]}, {this.state.currentYear}
+          {monthService.getMonthName(month)}
+          , {year}
         </p>
         <div className="month">
           <div className="week-header">
